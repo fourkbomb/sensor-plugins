@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 2.6)
+project(geo CXX)
+
+SET(SENSOR_HAL_NAME geo_sensor_hal)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_SOURCE_DIR}/src/shared)
+
+FOREACH(flag ${geo_pkgs_LDFLAGS})
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}")
+ENDFOREACH(flag)
+
+FOREACH(flag ${geo_pkgs_CFLAGS})
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}")
+ENDFOREACH(flag)
+
+add_library(${SENSOR_HAL_NAME} SHARED
+	geo_sensor_hal.cpp
+)
+
+target_link_libraries(${SENSOR_HAL_NAME} ${geo_pkgs_LDFLAGS})
+
+install(TARGETS ${SENSOR_HAL_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR}/sensord-plugins)
