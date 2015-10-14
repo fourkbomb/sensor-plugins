@@ -16,7 +16,7 @@ BuildRequires:  pkgconfig(libxml-2.0)
 %define proxi_state OFF
 %define light_state OFF
 %define geo_state ON
-%define pressure_state OFF
+%define pressure_state ON
 %define temperature_state OFF
 %define ultraviolet_state OFF
 %define rv_state OFF
