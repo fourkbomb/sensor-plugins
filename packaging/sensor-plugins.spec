@@ -19,7 +19,7 @@ BuildRequires:  pkgconfig(libxml-2.0)
 %define pressure_state ON
 %define temperature_state ON
 %define ultraviolet_state OFF
-%define rv_state OFF
+%define rv_state ON
 %define bio_led_red_state OFF
 
 %description
@@ -94,6 +94,10 @@ rm -rf %{buildroot}
 %if %{bio_led_red_state} == "ON"
 %{_libdir}/sensord-plugins/libbio_led_red_sensor_hal.so
 %endif
+%if %{rv_state} == "ON"
+%{_libdir}/sensord-plugins/librv_raw_sensor_hal.so
+%endif
+
 
 
 %files -n sensor-plugins-devel
