@@ -17,7 +17,7 @@ BuildRequires:  pkgconfig(libxml-2.0)
 %define light_state ON
 %define geo_state ON
 %define pressure_state ON
-%define temperature_state OFF
+%define temperature_state ON
 %define ultraviolet_state OFF
 %define rv_state OFF
 %define bio_led_red_state OFF
