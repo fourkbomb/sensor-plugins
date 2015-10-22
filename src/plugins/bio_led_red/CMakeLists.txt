@@ -20,4 +20,4 @@ add_library(${SENSOR_HAL_NAME} SHARED
 
 target_link_libraries(${SENSOR_HAL_NAME} ${bio_led_red_pkgs_LDFLAGS})
 
-install(TARGETS ${SENSOR_HAL_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR}/sensord-plugins)
+install(TARGETS ${SENSOR_HAL_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR}/sensor-hal)

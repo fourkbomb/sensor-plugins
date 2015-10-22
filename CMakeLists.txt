@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.6)
-project(sensord_plugins_main CXX)
+project(sensor_hal_main CXX)
 include(GNUInstallDirs)
 
 # Setup For pkgconfig File

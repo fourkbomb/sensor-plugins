@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 2.6)
-project(sensor-plugins CXX)
+project(sensor-hal CXX)
 
 INCLUDE(FindPkgConfig)
-PKG_CHECK_MODULES(sensord-plugins_pkgs REQUIRED dlog libxml-2.0)
+PKG_CHECK_MODULES(sensor-hal_pkgs REQUIRED dlog libxml-2.0)
 
-FOREACH(flag ${sensord-plugins_pkgs_LDFLAGS})
+FOREACH(flag ${sensor-hal_pkgs_LDFLAGS})
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}")
 ENDFOREACH(flag)
 
-FOREACH(flag ${sensord-plugins_pkgs_CFLAGS})
+FOREACH(flag ${sensor-hal_pkgs_CFLAGS})
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}")
 ENDFOREACH(flag)
 
@@ -25,7 +25,7 @@ add_library(${PROJECT_NAME} SHARED
 	sensor_hal.cpp
 )
 
-target_link_libraries(${PROJECT_NAME} ${sensord-plugins_pkgs_LDFLAGS} "-lrt -ldl")
+target_link_libraries(${PROJECT_NAME} ${sensor-hal_pkgs_LDFLAGS} "-lrt -ldl")
 configure_file(${PROJECT_NAME}.pc.in ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.pc @ONLY)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR})
