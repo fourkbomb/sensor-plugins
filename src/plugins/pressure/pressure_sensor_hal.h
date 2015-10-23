@@ -33,7 +33,7 @@ public:
 	bool enable(void);
 	bool disable(void);
 	bool set_interval(unsigned long val);
-	bool is_data_ready(bool wait);
+	bool is_data_ready(void);
 	virtual int get_sensor_data(sensor_data_t &data);
 	virtual bool get_properties(sensor_properties_s &properties);
 private:
@@ -65,6 +65,6 @@ private:
 
 	cmutex m_value_mutex;
 
-	bool update_value(bool wait);
+	bool update_value(void);
 };
 #endif /*_PRESSURE_SENSOR_HAL_CLASS_H_*/

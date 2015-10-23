@@ -1,7 +1,7 @@
 /*
  * libsensord-share
  *
- * Copyright (c) 2014 Samsung Electronics Co., Ltd.
+ * Copyright (c) 2015 Samsung Electronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ public:
 	virtual sensor_hal_type_t get_type(void) = 0;
 	virtual bool enable(void) = 0;
 	virtual bool disable(void) = 0;
-	virtual bool is_data_ready(bool wait) = 0;
+	virtual bool is_data_ready(void) = 0;
 	virtual bool set_interval(unsigned long val) = 0;
 	virtual int get_sensor_data(sensor_data_t &data) = 0;
 	virtual bool get_properties(sensor_properties_s &properties) = 0;

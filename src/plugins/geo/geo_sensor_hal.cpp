@@ -132,7 +132,6 @@ geo_sensor_hal::geo_sensor_hal()
 
 	INFO("m_raw_data_unit = %f\n", m_raw_data_unit);
 	INFO("geo_sensor_hal is created!\n");
-
 }
 
 geo_sensor_hal::~geo_sensor_hal()
@@ -193,7 +192,7 @@ bool geo_sensor_hal::set_interval(unsigned long val)
 	return true;
 }
 
-bool geo_sensor_hal::update_value(bool wait)
+bool geo_sensor_hal::update_value(void)
 {
 	int geo_raw[4] = {0,};
 	bool x,y,z,hdst;
@@ -266,10 +265,10 @@ bool geo_sensor_hal::update_value(bool wait)
 	return true;
 }
 
-bool geo_sensor_hal::is_data_ready(bool wait)
+bool geo_sensor_hal::is_data_ready(void)
 {
 	bool ret;
-	ret = update_value(wait);
+	ret = update_value();
 	return ret;
 }
 

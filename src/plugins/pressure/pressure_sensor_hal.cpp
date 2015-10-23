@@ -198,7 +198,7 @@ bool pressure_sensor_hal::set_interval(unsigned long val)
 	return true;
 }
 
-bool pressure_sensor_hal::update_value(bool wait)
+bool pressure_sensor_hal::update_value(void)
 {
 	int pressure_raw[3] = {0,};
 	bool pressure = false;
@@ -268,10 +268,10 @@ bool pressure_sensor_hal::update_value(bool wait)
 	return true;
 }
 
-bool pressure_sensor_hal::is_data_ready(bool wait)
+bool pressure_sensor_hal::is_data_ready(void)
 {
 	bool ret;
-	ret = update_value(wait);
+	ret = update_value();
 	return ret;
 }
 
@@ -287,7 +287,6 @@ int pressure_sensor_hal::get_sensor_data(sensor_data_t &data)
 
 	return 0;
 }
-
 
 bool pressure_sensor_hal::get_properties(sensor_properties_s &properties)
 {

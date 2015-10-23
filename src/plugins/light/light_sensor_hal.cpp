@@ -98,7 +98,6 @@ light_sensor_hal::light_sensor_hal()
 		ERR("Fail to set monotonic timestamp for %s", m_data_node.c_str());
 
 	INFO("light_sensor_hal is created!\n");
-
 }
 
 light_sensor_hal::~light_sensor_hal()
@@ -160,8 +159,7 @@ bool light_sensor_hal::set_interval(unsigned long val)
 	return true;
 }
 
-
-bool light_sensor_hal::update_value(bool wait)
+bool light_sensor_hal::update_value(void)
 {
 	unsigned short int adc = INITIAL_VALUE;
 
@@ -197,10 +195,10 @@ bool light_sensor_hal::update_value(bool wait)
 	return true;
 }
 
-bool light_sensor_hal::is_data_ready(bool wait)
+bool light_sensor_hal::is_data_ready(void)
 {
 	bool ret;
-	ret = update_value(wait);
+	ret = update_value();
 	return ret;
 }
 
@@ -214,7 +212,6 @@ int light_sensor_hal::get_sensor_data(sensor_data_t &data)
 
 	return 0;
 }
-
 
 bool light_sensor_hal::get_properties(sensor_properties_s &properties)
 {

@@ -93,7 +93,6 @@ rv_raw_sensor_hal::rv_raw_sensor_hal()
 		ERR("Fail to set monotonic timestamp for %s", m_data_node.c_str());
 
 	INFO("rv_raw_sensor_hal is created!\n");
-
 }
 
 rv_raw_sensor_hal::~rv_raw_sensor_hal()
@@ -152,10 +151,9 @@ bool rv_raw_sensor_hal::set_interval(unsigned long val)
 	INFO("Interval is changed from %dms to %dms]", m_polling_interval, val);
 	m_polling_interval = val;
 	return true;
-
 }
 
-bool rv_raw_sensor_hal::update_value(bool wait)
+bool rv_raw_sensor_hal::update_value(void)
 {
 	int rot_raw[5] = {0,};
 	bool quat_a,quat_b,quat_c,quat_d,acc_rot;
@@ -235,11 +233,10 @@ bool rv_raw_sensor_hal::update_value(bool wait)
 	return true;
 }
 
-
-bool rv_raw_sensor_hal::is_data_ready(bool wait)
+bool rv_raw_sensor_hal::is_data_ready(void)
 {
 	bool ret;
-	ret = update_value(wait);
+	ret = update_value();
 	return ret;
 }
 

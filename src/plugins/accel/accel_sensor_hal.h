@@ -33,7 +33,7 @@ public:
 	bool enable(void);
 	bool disable(void);
 	bool set_interval(unsigned long val);
-	bool is_data_ready(bool wait);
+	bool is_data_ready();
 	virtual int get_sensor_data(sensor_data_t &data);
 	bool get_properties(sensor_properties_s &properties);
 
@@ -63,7 +63,7 @@ private:
 
 	cmutex m_value_mutex;
 
-	bool update_value_input_event(bool wait);
-	bool update_value_iio(bool wait);
+	bool update_value_input_event(void);
+	bool update_value_iio(void);
 };
 #endif /*_ACCEL_SENSOR_HAL_CLASS_H_*/

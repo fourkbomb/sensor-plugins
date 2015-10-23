@@ -49,7 +49,6 @@ gyro_sensor_hal::gyro_sensor_hal()
 , m_polling_interval(POLL_1HZ_MS)
 , m_fired_time(0)
 {
-
 	const string sensorhub_interval_node_name = "gyro_poll_delay";
 	csensor_config &config = csensor_config::get_instance();
 
@@ -184,8 +183,7 @@ bool gyro_sensor_hal::set_interval(unsigned long val)
 	return true;
 }
 
-
-bool gyro_sensor_hal::update_value(bool wait)
+bool gyro_sensor_hal::update_value(void)
 {
 	int gyro_raw[3] = {0,};
 	bool x,y,z;
@@ -252,7 +250,7 @@ bool gyro_sensor_hal::update_value(bool wait)
 	return true;
 }
 
-bool gyro_sensor_hal::is_data_ready(bool wait)
+bool gyro_sensor_hal::is_data_ready(void)
 {
 	bool ret;
 	ret = update_value(wait);

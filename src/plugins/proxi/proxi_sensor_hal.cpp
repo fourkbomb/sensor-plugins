@@ -49,7 +49,6 @@ proxi_sensor_hal::proxi_sensor_hal()
 	if (!find_model_id(SENSOR_TYPE_PROXI, m_model_id)) {
 		ERR("Failed to find model id");
 		throw ENXIO;
-
 	}
 
 	query.sensorhub_controlled = m_sensorhub_controlled = is_sensorhub_controlled(sensorhub_interval_node_name);
@@ -92,7 +91,6 @@ proxi_sensor_hal::proxi_sensor_hal()
 		ERR("Fail to set monotonic timestamp for %s", m_data_node.c_str());
 
 	INFO("Proxi_sensor_hal is created!\n");
-
 }
 
 proxi_sensor_hal::~proxi_sensor_hal()
@@ -134,7 +132,7 @@ bool proxi_sensor_hal::disable(void)
 	return true;
 }
 
-bool proxi_sensor_hal::update_value(bool wait)
+bool proxi_sensor_hal::update_value(void)
 {
 	struct input_event proxi_event;
 	INFO("proxi event detection!");
@@ -157,10 +155,10 @@ bool proxi_sensor_hal::update_value(bool wait)
 	return true;
 }
 
-bool proxi_sensor_hal::is_data_ready(bool wait)
+bool proxi_sensor_hal::is_data_ready(void)
 {
 	bool ret;
-	ret = update_value(wait);
+	ret = update_value();
 	return ret;
 }
 

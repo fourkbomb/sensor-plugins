@@ -127,8 +127,8 @@ accel_sensor_hal::accel_sensor_hal()
 		if (ioctl(m_node_handle, EVIOCSCLOCKID, &clockId) != 0)
 			ERR("Fail to set monotonic timestamp for %s", m_data_node.c_str());
 
-		update_value = [=](bool wait) {
-			return this->update_value_input_event(wait);
+		update_value = [=]() {
+			return this->update_value_input_event();
 		};
 	} else {
 		if (!info.buffer_length_node_path.empty())
@@ -137,8 +137,8 @@ accel_sensor_hal::accel_sensor_hal()
 		if (!info.buffer_enable_node_path.empty())
 			set_node_value(info.buffer_enable_node_path, 1);
 
-		update_value = [=](bool wait) {
-			return this->update_value_iio(wait);
+		update_value = [=]() {
+			return this->update_value_iio();
 		};
 	}
 
@@ -203,8 +203,7 @@ bool accel_sensor_hal::set_interval(unsigned long val)
 	return true;
 }
 
-
-bool accel_sensor_hal::update_value_input_event(bool wait)
+bool accel_sensor_hal::update_value_input_event()
 {
 	int accel_raw[3] = {0,};
 	bool x,y,z;
@@ -276,8 +275,7 @@ bool accel_sensor_hal::update_value_input_event(bool wait)
 	return true;
 }
 
-
-bool accel_sensor_hal::update_value_iio(bool wait)
+bool accel_sensor_hal::update_value_iio()
 {
 	const int READ_LEN = 14;
 	char data[READ_LEN] = {0,};
@@ -330,10 +328,10 @@ bool accel_sensor_hal::update_value_iio(bool wait)
 
 }
 
-bool accel_sensor_hal::is_data_ready(bool wait)
+bool accel_sensor_hal::is_data_ready(void)
 {
 	bool ret;
-	ret = update_value(wait);
+	ret = update_value();
 	return ret;
 }
 

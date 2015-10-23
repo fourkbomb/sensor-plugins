@@ -127,7 +127,6 @@ ultraviolet_sensor_hal::ultraviolet_sensor_hal()
 
 	INFO("m_raw_data_unit = %f\n", m_raw_data_unit);
 	INFO("ultraviolet_sensor_hal is created!\n");
-
 }
 
 ultraviolet_sensor_hal::~ultraviolet_sensor_hal()
@@ -187,11 +186,9 @@ bool ultraviolet_sensor_hal::set_interval(unsigned long val)
 	INFO("Interval is changed from %dms to %dms]", m_polling_interval, val);
 	m_polling_interval = val;
 	return true;
-
 }
 
-
-bool ultraviolet_sensor_hal::update_value(bool wait)
+bool ultraviolet_sensor_hal::update_value(void)
 {
 	int ultraviolet_raw = -1;
 	bool ultraviolet_sign = false;
@@ -241,10 +238,10 @@ bool ultraviolet_sensor_hal::update_value(bool wait)
 	return true;
 }
 
-bool ultraviolet_sensor_hal::is_data_ready(bool wait)
+bool ultraviolet_sensor_hal::is_data_ready(void)
 {
 	bool ret;
-	ret = update_value(wait);
+	ret = update_value();
 	return ret;
 }
 

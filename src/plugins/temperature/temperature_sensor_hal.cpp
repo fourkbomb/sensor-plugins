@@ -162,10 +162,9 @@ bool temperature_sensor_hal::set_interval(unsigned long val)
 	INFO("Interval is changed from %dms to %dms]", m_polling_interval, val);
 	m_polling_interval = val;
 	return true;
-
 }
 
-bool temperature_sensor_hal::update_value(bool wait)
+bool temperature_sensor_hal::update_value(void)
 {
 	int temperature_raw = 0;
 	bool temperature = false;
@@ -223,10 +222,10 @@ bool temperature_sensor_hal::update_value(bool wait)
 	return true;
 }
 
-bool temperature_sensor_hal::is_data_ready(bool wait)
+bool temperature_sensor_hal::is_data_ready(void)
 {
 	bool ret;
-	ret = update_value(wait);
+	ret = update_value();
 	return ret;
 }
 
@@ -240,7 +239,6 @@ int temperature_sensor_hal::get_sensor_data(sensor_data_t &data)
 
 	return 0;
 }
-
 
 bool temperature_sensor_hal::get_properties(sensor_properties_s &properties)
 {

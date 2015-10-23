@@ -96,7 +96,6 @@ bio_led_red_sensor_hal::bio_led_red_sensor_hal()
 		ERR("Fail to set monotonic timestamp for %s", m_data_node.c_str());
 
 	INFO("bio_led_red_sensor_hal is created!\n");
-
 }
 
 bio_led_red_sensor_hal::~bio_led_red_sensor_hal()
@@ -111,7 +110,6 @@ string bio_led_red_sensor_hal::get_model_id(void)
 {
 	return m_model_id;
 }
-
 
 sensor_hal_type_t bio_led_red_sensor_hal::get_type(void)
 {
@@ -166,8 +164,7 @@ bool bio_led_red_sensor_hal::set_interval(unsigned long val)
 
 }
 
-
-bool bio_led_red_sensor_hal::update_value(bool wait)
+bool bio_led_red_sensor_hal::update_value(void)
 {
 	int bio_led_red_raw = -1;
 	bool bio_led_red = false;
@@ -214,10 +211,10 @@ bool bio_led_red_sensor_hal::update_value(bool wait)
 	return true;
 }
 
-bool bio_led_red_sensor_hal::is_data_ready(bool wait)
+bool bio_led_red_sensor_hal::is_data_ready(void)
 {
 	bool ret;
-	ret = update_value(wait);
+	ret = update_value();
 	return ret;
 }
 

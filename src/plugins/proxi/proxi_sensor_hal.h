@@ -31,7 +31,7 @@ public:
 	sensor_hal_type_t get_type(void);
 	bool enable(void);
 	bool disable(void);
-	bool is_data_ready(bool wait);
+	bool is_data_ready(void);
 	virtual int get_sensor_data(sensor_data_t &data);
 	virtual bool get_properties(sensor_properties_s &properties);
 private:
@@ -50,6 +50,6 @@ private:
 	bool m_sensorhub_controlled;
 	cmutex m_value_mutex;
 
-	bool update_value(bool wait);
+	bool update_value(void);
 };
 #endif /*_PROXI_SENSOR_HAL_H_*/
