@@ -20,9 +20,9 @@
 #ifndef _PROXI_SENSOR_HAL_H_
 #define _PROXI_SENSOR_HAL_H_
 
-#include <sensor_hal.h>
+#include <sensor_hal_interface.h>
 
-class proxi_sensor_hal : public sensor_hal
+class proxi_sensor_hal : public sensor_hal_interface
 {
 public:
 	proxi_sensor_hal();

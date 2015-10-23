@@ -20,9 +20,9 @@
 #ifndef _LIGHT_SENSOR_HAL_H_
 #define _LIGHT_SENSOR_HAL_H_
 
-#include <sensor_hal.h>
+#include <sensor_hal_interface.h>
 
-class light_sensor_hal : public sensor_hal
+class light_sensor_hal : public sensor_hal_interface
 {
 public:
 	light_sensor_hal();

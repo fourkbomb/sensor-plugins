@@ -38,46 +38,6 @@ sensor_hal::~sensor_hal()
 {
 }
 
-bool sensor_hal::init(void *data)
-{
-	return true;
-}
-
-bool sensor_hal::is_wakeup_supported(void)
-{
-	return false;
-}
-
-bool sensor_hal::set_interval(unsigned long val)
-{
-	return true;
-}
-
-long sensor_hal::set_command(unsigned int cmd, long val)
-{
-	return -1;
-}
-
-bool sensor_hal::set_wakeup(int wakeup)
-{
-	return false;
-}
-
-int sensor_hal::send_sensorhub_data(const char* data, int data_len)
-{
-	return -1;
-}
-
-int sensor_hal::get_sensor_data(sensor_data_t &data)
-{
-	return -1;
-}
-
-int sensor_hal::get_sensor_data(sensorhub_data_t &data)
-{
-	return -1;
-}
-
 unsigned long long sensor_hal::get_timestamp(void)
 {
 	struct timespec t;

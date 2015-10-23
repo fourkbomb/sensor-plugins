@@ -20,9 +20,9 @@
 #ifndef _RV_RAW_SENSOR_HAL_H_
 #define _RV_RAW_SENSOR_HAL_H_
 
-#include <sensor_hal.h>
+#include <sensor_hal_interface.h>
 
-class rv_raw_sensor_hal : public sensor_hal
+class rv_raw_sensor_hal : public sensor_hal_interface
 {
 public:
 	rv_raw_sensor_hal();

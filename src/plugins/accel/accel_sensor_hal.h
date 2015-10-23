@@ -20,10 +20,10 @@
 #ifndef _ACCEL_SENSOR_HAL_H_
 #define _ACCEL_SENSOR_HAL_H_
 
-#include <sensor_hal.h>
+#include <sensor_hal_interface.h>
 #include <functional>
 
-class accel_sensor_hal : public sensor_hal
+class accel_sensor_hal : public sensor_hal_interface
 {
 public:
 	accel_sensor_hal();

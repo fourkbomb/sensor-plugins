@@ -20,9 +20,9 @@
 #ifndef _GEO_SENSOR_HAL_H_
 #define _GEO_SENSOR_HAL_H_
 
-#include <sensor_hal.h>
+#include <sensor_hal_interface.h>
 
-class geo_sensor_hal : public sensor_hal
+class geo_sensor_hal : public sensor_hal_interface
 {
 public:
 	geo_sensor_hal();

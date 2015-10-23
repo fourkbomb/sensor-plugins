@@ -96,27 +96,16 @@ public:
 	sensor_hal();
 	virtual ~sensor_hal();
 
-	virtual bool init(void *data = NULL);
-	virtual std::string get_model_id(void) = 0;
-	virtual sensor_hal_type_t get_type(void) = 0;
-	virtual bool enable(void) = 0;
-	virtual bool disable(void) = 0;
-	virtual bool set_interval(unsigned long val);
-	virtual bool is_data_ready(bool wait) = 0;
-	virtual bool is_wakeup_supported(void);
-	virtual bool get_properties(sensor_properties_s &properties) {return false;};
-	virtual bool get_properties(sensor_type_t sensor_type, sensor_properties_s &properties) {return false;};
-	virtual int get_sensor_data(sensor_data_t &data);
-	virtual int get_sensor_data(sensorhub_data_t &data);
-	virtual long set_command(unsigned int cmd, long val);
-	virtual bool set_wakeup(int wakeup);
-	virtual int send_sensorhub_data(const char *data, int data_len);
+	bool init(void *data = NULL);
+	long set_command(unsigned int cmd, long val);
+	bool set_wakeup(int wakeup);
+	int send_sensorhub_data(const char *data, int data_len);
 
 protected:
 	cmutex m_mutex;
 	static cmutex m_shared_mutex;
 
-	virtual bool set_enable_node(const std::string &node_path, bool sensorhub_controlled, bool enable, int enable_bit = 0);
+	bool set_enable_node(const std::string &node_path, bool sensorhub_controlled, bool enable, int enable_bit = 0);
 
 	static unsigned long long get_timestamp(void);
 	static unsigned long long get_timestamp(timeval *t);

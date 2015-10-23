@@ -20,9 +20,9 @@
 #ifndef _TEMPERATURE_SENSOR_HAL_H_
 #define _TEMPERATURE_SENSOR_HAL_H_
 
-#include <sensor_hal.h>
+#include <sensor_hal_interface.h>
 
-class temperature_sensor_hal : public sensor_hal
+class temperature_sensor_hal : public sensor_hal_interface
 {
 public:
 	temperature_sensor_hal();
