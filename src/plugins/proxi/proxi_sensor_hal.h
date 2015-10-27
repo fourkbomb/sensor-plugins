@@ -20,9 +20,9 @@
 #ifndef _PROXI_SENSOR_HAL_H_
 #define _PROXI_SENSOR_HAL_H_
 
-#include <sensor_hal_interface.h>
+#include <sensor_hal_base.h>
 
-class proxi_sensor_hal : public sensor_hal_interface
+class proxi_sensor_hal : public sensor_hal_base
 {
 public:
 	proxi_sensor_hal();
@@ -31,6 +31,7 @@ public:
 	sensor_hal_type_t get_type(void);
 	bool enable(void);
 	bool disable(void);
+	bool set_interval(unsigned long ms_interval);
 	bool is_data_ready(void);
 	virtual int get_sensor_data(sensor_data_t &data);
 	virtual bool get_properties(sensor_properties_s &properties);

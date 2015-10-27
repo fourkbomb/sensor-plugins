@@ -20,9 +20,9 @@
 #ifndef _BIO_LED_RED_SENSOR_HAL_H_
 #define _BIO_LED_RED_SENSOR_HAL_H_
 
-#include <sensor_hal_interface.h>
+#include <sensor_hal_base.h>
 
-class bio_led_red_sensor_hal : public sensor_hal_interface
+class bio_led_red_sensor_hal : public sensor_hal_base
 {
 public:
 	bio_led_red_sensor_hal();

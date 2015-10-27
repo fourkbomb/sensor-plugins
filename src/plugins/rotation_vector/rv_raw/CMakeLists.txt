@@ -4,7 +4,8 @@ project(rv_raw CXX)
 SET(SENSOR_HAL_NAME rv_raw_sensor_hal)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(${CMAKE_SOURCE_DIR}/src/shared)
+include_directories(${CMAKE_SOURCE_DIR}/src/lib)
+include_directories(${CMAKE_SOURCE_DIR}/src/interface)
 
 FOREACH(flag ${rv_raw_pkgs_LDFLAGS})
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}")

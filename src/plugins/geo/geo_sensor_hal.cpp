@@ -240,7 +240,7 @@ bool geo_sensor_hal::update_value(void)
 			}
 		} else if (geo_input.type == EV_SYN) {
 			syn = true;
-			fired_time = get_timestamp(&geo_input.time);
+			fired_time = sensor_hal_base::get_timestamp(&geo_input.time);
 		} else {
 			ERR("geo_input event[type = %d, code = %d] is unknown.", geo_input.type, geo_input.code);
 			return false;

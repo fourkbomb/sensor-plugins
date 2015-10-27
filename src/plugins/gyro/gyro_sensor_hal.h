@@ -20,9 +20,9 @@
 #ifndef _GYRO_SENSOR_HAL_H_
 #define _GYRO_SENSOR_HAL_H_
 
-#include <sensor_hal_interface.h>
+#include <sensor_hal_base.h>
 
-class gyro_sensor_hal : public sensor_hal_interface
+class gyro_sensor_hal : public sensor_hal_base
 {
 public:
 	gyro_sensor_hal();

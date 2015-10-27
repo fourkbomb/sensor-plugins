@@ -20,9 +20,9 @@
 #ifndef _ULTRAVIOLET_SENSOR_HAL_H_
 #define _ULTRAVIOLET_SENSOR_HAL_H_
 
-#include <sensor_hal_interface.h>
+#include <sensor_hal_base.h>
 
-class ultraviolet_sensor_hal : public sensor_hal_interface
+class ultraviolet_sensor_hal : public sensor_hal_base
 {
 public:
 	ultraviolet_sensor_hal();

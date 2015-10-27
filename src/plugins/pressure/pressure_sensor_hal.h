@@ -20,9 +20,9 @@
 #ifndef _PRESSURE_SENSOR_HAL_H_
 #define _PRESSURE_SENSOR_HAL_H_
 
-#include <sensor_hal_interface.h>
+#include <sensor_hal_base.h>
 
-class pressure_sensor_hal : public sensor_hal_interface
+class pressure_sensor_hal : public sensor_hal_base
 {
 public:
 	pressure_sensor_hal();

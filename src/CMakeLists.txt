@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 2.6)
 project(sensor_hal_src CXX)
 
-include_directories(${CMAKE_SOURCE_DIR}/src/shared)
+include_directories(${CMAKE_SOURCE_DIR}/src/lib)
+include_directories(${CMAKE_SOURCE_DIR}/src/interface)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 IF("${ACCEL}" STREQUAL "ON")
@@ -35,4 +36,5 @@ IF("${RV}" STREQUAL "ON")
 add_subdirectory(plugins/rotation_vector/rv_raw)
 ENDIF()
 
-add_subdirectory(shared)
+add_subdirectory(lib)
+add_subdirectory(interface)

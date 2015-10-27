@@ -217,7 +217,7 @@ bool ultraviolet_sensor_hal::update_value(void)
 			ultraviolet_sign = ((int)ultraviolet_event.value < 0) ? false : true;
 		} else if (ultraviolet_event.type == EV_SYN) {
 			syn = true;
-			fired_time = sensor_hal::get_timestamp(&ultraviolet_event.time);
+			fired_time = sensor_hal_base::get_timestamp(&ultraviolet_event.time);
 		} else {
 			ERR("ultraviolet event[type = %d, code = %d] is unknown.", ultraviolet_event.type, ultraviolet_event.code);
 			return false;

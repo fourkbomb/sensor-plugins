@@ -103,11 +103,10 @@ rm -rf %{buildroot}
 %files -n sensor-hal-devel
 %{_includedir}/sensor-hal/cconfig.h
 %{_includedir}/sensor-hal/csensor_config.h
-%{_includedir}/sensor-hal/sensor_hal.h
-%{_includedir}/sensor-hal/sf_common.h
+%{_includedir}/sensor-hal/sensor_hal_base.h
 %{_includedir}/sensor-hal/cbase_lock.h
 %{_includedir}/sensor-hal/cmutex.h
-%{_includedir}/sensor-hal/common.h
+%{_includedir}/sensor-hal/sensor_logs.h
 %{_includedir}/sensor-hal/sensor_common.h
 %{_libdir}/libsensor-hal.so
 %{_libdir}/pkgconfig/sensor-hal.pc

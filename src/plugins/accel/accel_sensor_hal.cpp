@@ -247,7 +247,7 @@ bool accel_sensor_hal::update_value_input_event()
 			}
 		} else if (accel_input.type == EV_SYN) {
 			syn = true;
-			fired_time = sensor_hal::get_timestamp(&accel_input.time);
+			fired_time = sensor_hal_base::get_timestamp(&accel_input.time);
 		} else {
 			ERR("accel_input event[type = %d, code = %d] is unknown.", accel_input.type, accel_input.code);
 			return false;

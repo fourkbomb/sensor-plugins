@@ -21,6 +21,7 @@
 #define __SENSOR_COMMON_H__
 
 #include <unistd.h>
+#include <sensor_logs.h>
 #include <string>
 #include <vector>
 

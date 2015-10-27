@@ -245,7 +245,7 @@ bool pressure_sensor_hal::update_value(void)
 			}
 		} else if (pressure_event.type == EV_SYN) {
 			syn = true;
-			fired_time = sensor_hal::get_timestamp(&pressure_event.time);
+			fired_time = sensor_hal_base::get_timestamp(&pressure_event.time);
 		} else {
 			ERR("pressure_event event[type = %d, code = %d] is unknown.", pressure_event.type, pressure_event.code);
 			return false;

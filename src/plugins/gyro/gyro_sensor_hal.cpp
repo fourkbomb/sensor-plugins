@@ -227,7 +227,7 @@ bool gyro_sensor_hal::update_value(void)
 			}
 		} else if (gyro_input.type == EV_SYN) {
 			syn = true;
-			fired_time = sensor_hal::get_timestamp(&gyro_input.time);
+			fired_time = sensor_hal_base::get_timestamp(&gyro_input.time);
 		} else {
 			ERR("gyro_input event[type = %d, code = %d] is unknown.", gyro_input.type, gyro_input.code);
 			return false;
@@ -253,7 +253,7 @@ bool gyro_sensor_hal::update_value(void)
 bool gyro_sensor_hal::is_data_ready(void)
 {
 	bool ret;
-	ret = update_value(wait);
+	ret = update_value();
 	return ret;
 }
 

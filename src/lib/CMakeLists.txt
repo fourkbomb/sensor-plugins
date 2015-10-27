@@ -20,9 +20,8 @@ add_library(${PROJECT_NAME} SHARED
 	cbase_lock.cpp
 	cconfig.cpp
 	cmutex.cpp
-	common.cpp
+	sensor_logs.cpp
 	csensor_config.cpp
-	sensor_hal.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} ${sensor-hal_pkgs_LDFLAGS} "-lrt -ldl")
@@ -34,11 +33,9 @@ install(FILES ${PROJECT_NAME}.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 install(FILES
 	cconfig.h
 	csensor_config.h
-	sensor_hal.h
-	sf_common.h
 	cbase_lock.h
 	cmutex.h
-	common.h
+	sensor_logs.h
 	sensor_common.h
 	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
 )

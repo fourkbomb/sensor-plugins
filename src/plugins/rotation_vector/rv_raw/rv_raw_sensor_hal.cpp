@@ -205,7 +205,7 @@ bool rv_raw_sensor_hal::update_value(void)
 			}
 		} else if (rot_input.type == EV_SYN) {
 			syn = true;
-			fired_time = get_timestamp(&rot_input.time);
+			fired_time = sensor_hal_base::get_timestamp(&rot_input.time);
 		} else {
 			ERR("rot_input event[type = %d, code = %d] is unknown.", rot_input.type, rot_input.code);
 			return false;

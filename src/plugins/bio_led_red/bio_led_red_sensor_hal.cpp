@@ -192,7 +192,7 @@ bool bio_led_red_sensor_hal::update_value(void)
 			ERR("bio_led_red event[type = %d, code = %d] is skipped.", bio_led_red_event.type, bio_led_red_event.code);
 		} else if (bio_led_red_event.type == EV_SYN) {
 			syn = true;
-			fired_time = sensor_hal::get_timestamp(&bio_led_red_event.time);
+			fired_time = sensor_hal_base::get_timestamp(&bio_led_red_event.time);
 		} else {
 			ERR("bio_led_red event[type = %d, code = %d] is unknown.", bio_led_red_event.type, bio_led_red_event.code);
 			return false;

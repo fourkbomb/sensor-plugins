@@ -20,9 +20,9 @@
 #ifndef _SENSOR_HAL_BASE_H_
 #define _SENSOR_HAL_BASE_H_
 #include <sys/time.h>
-#include <sf_common.h>
+#include <sensor_common.h>
 #include <cmutex.h>
-#include <common.h>
+#include <sensor_logs.h>
 #include <string>
 #include <sensor_hal.h>
 
@@ -35,30 +35,6 @@
 #define EVIOCSCLOCKID		_IOW('E', 0xa0, int)			/* Set clockid to be used for timestamps */
 #endif
 
-typedef enum {
-	SENSOR_HAL_TYPE_ACCELEROMETER,
-	SENSOR_HAL_TYPE_GEOMAGNETIC,
-	SENSOR_HAL_TYPE_LIGHT,
-	SENSOR_HAL_TYPE_PROXIMITY,
-	SENSOR_HAL_TYPE_GYROSCOPE,
-	SENSOR_HAL_TYPE_PRESSURE,
-	SENSOR_HAL_TYPE_CONTEXT,
-	SENSOR_HAL_TYPE_BIO,
-	SENSOR_HAL_TYPE_BIO_HRM,
-	SENSOR_HAL_TYPE_PIR,
-	SENSOR_HAL_TYPE_PIR_LONG,
-	SENSOR_HAL_TYPE_TEMPERATURE,
-	SENSOR_HAL_TYPE_HUMIDITY,
-	SENSOR_HAL_TYPE_ULTRAVIOLET,
-	SENSOR_HAL_TYPE_DUST,
-	SENSOR_HAL_TYPE_BIO_LED_IR,
-	SENSOR_HAL_TYPE_BIO_LED_RED,
-	SENSOR_HAL_TYPE_BIO_LED_GREEN,
-	SENSOR_HAL_TYPE_RV_RAW,
-	SENSOR_HAL_TYPE_GYROSCOPE_UNCAL,
-	SENSOR_HAL_TYPE_GEOMAGNETIC_UNCAL,
-	SENSOR_HAL_TYPE_FUSION,
-} sensor_hal_base_type_t;
 
 typedef struct {
 	int method;

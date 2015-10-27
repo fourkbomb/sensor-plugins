@@ -190,7 +190,7 @@ bool light_sensor_hal::update_value(void)
 
 	AUTOLOCK(m_value_mutex);
 	m_adc = adc;
-	m_fired_time = get_timestamp(&light_event.time);
+	m_fired_time = sensor_hal_base::get_timestamp(&light_event.time);
 
 	return true;
 }

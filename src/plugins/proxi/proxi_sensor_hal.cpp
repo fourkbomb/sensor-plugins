@@ -132,6 +132,11 @@ bool proxi_sensor_hal::disable(void)
 	return true;
 }
 
+bool proxi_sensor_hal::set_interval(unsigned long val)
+{
+	return true;
+}
+
 bool proxi_sensor_hal::update_value(void)
 {
 	struct input_event proxi_event;
@@ -148,7 +153,7 @@ bool proxi_sensor_hal::update_value(void)
 	if ((proxi_event.type == EV_ABS) && (proxi_event.code == PROXI_CODE)) {
 		AUTOLOCK(m_value_mutex);
 		m_state = proxi_event.value;
-		m_fired_time = sensor_hal::get_timestamp(&proxi_event.time);
+		m_fired_time = sensor_hal_base::get_timestamp(&proxi_event.time);
 	} else {
 		return false;
 	}

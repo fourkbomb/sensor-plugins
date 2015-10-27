@@ -20,10 +20,10 @@
 #ifndef _ACCEL_SENSOR_HAL_H_
 #define _ACCEL_SENSOR_HAL_H_
 
-#include <sensor_hal_interface.h>
+#include <sensor_hal_base.h>
 #include <functional>
 
-class accel_sensor_hal : public sensor_hal_interface
+class accel_sensor_hal : public sensor_hal_base
 {
 public:
 	accel_sensor_hal();
@@ -57,7 +57,7 @@ private:
 	std::string m_enable_node;
 	std::string m_interval_node;
 
-	std::function<bool (bool)> update_value;
+	std::function<bool ()> update_value;
 
 	bool m_sensorhub_controlled;
 

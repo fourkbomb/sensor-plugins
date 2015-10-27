@@ -18,7 +18,7 @@
  */
 
 #include <csensor_config.h>
-#include "common.h"
+#include "sensor_logs.h"
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
 #include <sstream>

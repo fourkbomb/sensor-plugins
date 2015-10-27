@@ -198,7 +198,7 @@ bool temperature_sensor_hal::update_value(void)
 			}
 		} else if (temperature_event.type == EV_SYN) {
 			syn = true;
-			fired_time = sensor_hal::get_timestamp(&temperature_event.time);
+			fired_time = sensor_hal_base::get_timestamp(&temperature_event.time);
 		} else {
 			ERR("temperature_event event[type = %d, code = %d] is unknown.", temperature_event.type, temperature_event.code);
 			return false;
