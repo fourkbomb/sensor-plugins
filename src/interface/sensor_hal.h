@@ -17,16 +17,14 @@
  *
  */
 
-#ifndef _SENSOR_HAL_INTERFACE_H_
-#define _SENSOR_HAL_INTERFACE_H_
+#ifndef _SENSOR_HAL_H_
+#define _SENSOR_HAL_H_
 
-#include <sensor_hal.h>
-
-class sensor_hal_interface : public sensor_hal
+class sensor_hal
 {
 public:
-	sensor_hal_interface();
-	virtual ~sensor_hal_interface();
+	sensor_hal();
+	virtual ~sensor_hal();
 
 	virtual std::string get_model_id(void) = 0;
 	virtual sensor_hal_type_t get_type(void) = 0;
@@ -37,4 +35,4 @@ public:
 	virtual int get_sensor_data(sensor_data_t &data) = 0;
 	virtual bool get_properties(sensor_properties_s &properties) = 0;
 };
-#endif /*_SENSOR_HAL_INTERFACE_H_*/
+#endif /*_SENSOR_HAL_H_*/

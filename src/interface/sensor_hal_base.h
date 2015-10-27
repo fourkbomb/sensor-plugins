@@ -17,13 +17,14 @@
  *
  */
 
-#ifndef _SENSOR_HAL_H_
-#define _SENSOR_HAL_H_
+#ifndef _SENSOR_HAL_BASE_H_
+#define _SENSOR_HAL_BASE_H_
 #include <sys/time.h>
 #include <sf_common.h>
 #include <cmutex.h>
 #include <common.h>
 #include <string>
+#include <sensor_hal.h>
 
 /*
 * As of Linux 3.4, there is a new EVIOCSCLOCKID ioctl to set the desired clock
@@ -57,7 +58,7 @@ typedef enum {
 	SENSOR_HAL_TYPE_GYROSCOPE_UNCAL,
 	SENSOR_HAL_TYPE_GEOMAGNETIC_UNCAL,
 	SENSOR_HAL_TYPE_FUSION,
-} sensor_hal_type_t;
+} sensor_hal_base_type_t;
 
 typedef struct {
 	int method;
@@ -90,11 +91,11 @@ typedef struct {
 
 #define DEFAULT_WAIT_TIME 0
 
-class sensor_hal
+class sensor_hal_base : public sensor_hal
 {
 public:
-	sensor_hal();
-	virtual ~sensor_hal();
+	sensor_hal_base();
+	virtual ~sensor_hal_base();
 
 	bool init(void *data = NULL);
 	long set_command(unsigned int cmd, long val);
@@ -125,4 +126,4 @@ private:
 	static bool get_input_event_node_info(const std::string& device_num, node_info &info);
 	static bool get_sensorhub_input_event_node_info(const std::string &interval_node_name, const std::string& device_num, node_info &info);
 };
-#endif /*_SENSOR_HAL_CLASS_H_*/
+#endif /*_SENSOR_HAL_BASE_H_*/

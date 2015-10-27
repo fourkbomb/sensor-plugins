@@ -17,7 +17,7 @@
  *
  */
 
-#include <sensor_hal.h>
+#include <sensor_hal_base.h>
 #include <dirent.h>
 #include <string.h>
 #include <fstream>
@@ -28,24 +28,24 @@ using std::ofstream;
 using std::fstream;
 using std::string;
 
-cmutex sensor_hal::m_shared_mutex;
+cmutex sensor_hal_base::m_shared_mutex;
 
-sensor_hal::sensor_hal()
+sensor_hal_base::sensor_hal_base()
 {
 }
 
-sensor_hal::~sensor_hal()
+sensor_hal_base::~sensor_hal_base()
 {
 }
 
-unsigned long long sensor_hal::get_timestamp(void)
+unsigned long long sensor_hal_base::get_timestamp(void)
 {
 	struct timespec t;
 	clock_gettime(CLOCK_MONOTONIC, &t);
 	return ((unsigned long long)(t.tv_sec)*1000000000LL + t.tv_nsec) / 1000;
 }
 
-unsigned long long sensor_hal::get_timestamp(timeval *t)
+unsigned long long sensor_hal_base::get_timestamp(timeval *t)
 {
 	if (!t) {
 		ERR("t is NULL");
@@ -55,7 +55,7 @@ unsigned long long sensor_hal::get_timestamp(timeval *t)
 	return ((unsigned long long)(t->tv_sec)*1000000LL +t->tv_usec);
 }
 
-bool sensor_hal::is_sensorhub_controlled(const string &key)
+bool sensor_hal_base::is_sensorhub_controlled(const string &key)
 {
 	string key_node =  string("/sys/class/sensors/ssp_sensor/") + key;
 
@@ -65,7 +65,7 @@ bool sensor_hal::is_sensorhub_controlled(const string &key)
 	return false;
 }
 
-bool sensor_hal::get_node_info(const node_info_query &query, node_info &info)
+bool sensor_hal_base::get_node_info(const node_info_query &query, node_info &info)
 {
 	bool ret = false;
 	int method;
@@ -94,7 +94,7 @@ bool sensor_hal::get_node_info(const node_info_query &query, node_info &info)
 }
 
 
-void sensor_hal::show_node_info(node_info &info)
+void sensor_hal_base::show_node_info(node_info &info)
 {
 	if (info.data_node_path.size())
 		INFO("Data node: %s", info.data_node_path.c_str());
@@ -110,7 +110,7 @@ void sensor_hal::show_node_info(node_info &info)
 		INFO("Trigger node: %s", info.trigger_node_path.c_str());
 }
 
-bool sensor_hal::get_iio_node_info(const string& enable_node_name, const string& device_num, node_info &info)
+bool sensor_hal_base::get_iio_node_info(const string& enable_node_name, const string& device_num, node_info &info)
 {
 	const string base_dir = string("/sys/bus/iio/devices/iio:device") + device_num + string("/");
 
@@ -124,7 +124,7 @@ bool sensor_hal::get_iio_node_info(const string& enable_node_name, const string&
 	return true;
 }
 
-bool sensor_hal::get_sensorhub_iio_node_info(const string &interval_node_name, const string& device_num, node_info &info)
+bool sensor_hal_base::get_sensorhub_iio_node_info(const string &interval_node_name, const string& device_num, node_info &info)
 {
 	const string base_dir = string("/sys/bus/iio/devices/iio:device") + device_num + string("/");
 	const string hub_dir = "/sys/class/sensors/ssp_sensor/";
@@ -137,7 +137,7 @@ bool sensor_hal::get_sensorhub_iio_node_info(const string &interval_node_name, c
 	return true;
 }
 
-bool sensor_hal::get_input_event_node_info(const string& device_num, node_info &info)
+bool sensor_hal_base::get_input_event_node_info(const string& device_num, node_info &info)
 {
 	string base_dir;
 	string event_num;
@@ -154,7 +154,7 @@ bool sensor_hal::get_input_event_node_info(const string& device_num, node_info &
 	return true;
 }
 
-bool sensor_hal::get_sensorhub_input_event_node_info(const string &interval_node_name, const string& device_num, node_info &info)
+bool sensor_hal_base::get_sensorhub_input_event_node_info(const string &interval_node_name, const string& device_num, node_info &info)
 {
 	const string base_dir = "/sys/class/sensors/ssp_sensor/";
 	string event_num;
@@ -170,7 +170,7 @@ bool sensor_hal::get_sensorhub_input_event_node_info(const string &interval_node
 	return true;
 }
 
-bool sensor_hal::set_node_value(const string &node_path, int value)
+bool sensor_hal_base::set_node_value(const string &node_path, int value)
 {
 	ofstream node(node_path, ofstream::binary);
 
@@ -182,7 +182,7 @@ bool sensor_hal::set_node_value(const string &node_path, int value)
 	return true;
 }
 
-bool sensor_hal::set_node_value(const string &node_path, unsigned long long value)
+bool sensor_hal_base::set_node_value(const string &node_path, unsigned long long value)
 {
 	ofstream node(node_path, ofstream::binary);
 
@@ -195,7 +195,7 @@ bool sensor_hal::set_node_value(const string &node_path, unsigned long long valu
 }
 
 
-bool sensor_hal::get_node_value(const string &node_path, int &value)
+bool sensor_hal_base::get_node_value(const string &node_path, int &value)
 {
 	ifstream node(node_path, ifstream::binary);
 
@@ -207,7 +207,7 @@ bool sensor_hal::get_node_value(const string &node_path, int &value)
 	return true;
 }
 
-bool sensor_hal::set_enable_node(const string &node_path, bool sensorhub_controlled, bool enable, int enable_bit)
+bool sensor_hal_base::set_enable_node(const string &node_path, bool sensorhub_controlled, bool enable, int enable_bit)
 {
 	int prev_status, status;
 
@@ -234,7 +234,7 @@ bool sensor_hal::set_enable_node(const string &node_path, bool sensorhub_control
 }
 
 
-bool sensor_hal::find_model_id(const string &sensor_type, string &model_id)
+bool sensor_hal_base::find_model_id(const string &sensor_type, string &model_id)
 {
 	string dir_path = "/sys/class/sensors/";
 	string name_node, name;
@@ -275,7 +275,7 @@ bool sensor_hal::find_model_id(const string &sensor_type, string &model_id)
 	return find;
 }
 
-bool sensor_hal::get_event_num(const string &input_path, string &event_num)
+bool sensor_hal_base::get_event_num(const string &input_path, string &event_num)
 {
 	const string event_prefix = "event";
 	DIR *dir = NULL;
@@ -306,7 +306,7 @@ bool sensor_hal::get_event_num(const string &input_path, string &event_num)
 	return find;
 }
 
-bool sensor_hal::get_input_method(const string &key, int &method, string &device_num)
+bool sensor_hal_base::get_input_method(const string &key, int &method, string &device_num)
 {
 	input_method_info input_info[2] = {
 		{INPUT_EVENT_METHOD, "/sys/class/input/", "input"},
