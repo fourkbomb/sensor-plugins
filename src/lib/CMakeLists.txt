@@ -15,27 +15,3 @@ ENDFOREACH(flag)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-
-add_library(${PROJECT_NAME} SHARED
-	cbase_lock.cpp
-	cconfig.cpp
-	cmutex.cpp
-	sensor_logs.cpp
-	csensor_config.cpp
-)
-
-target_link_libraries(${PROJECT_NAME} ${sensor-hal_pkgs_LDFLAGS} "-lrt -ldl")
-configure_file(${PROJECT_NAME}.pc.in ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.pc @ONLY)
-
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR})
-install(FILES ${PROJECT_NAME}.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
-
-install(FILES
-	cconfig.h
-	csensor_config.h
-	cbase_lock.h
-	cmutex.h
-	sensor_logs.h
-	sensor_common.h
-	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
-)

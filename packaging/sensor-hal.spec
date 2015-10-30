@@ -33,14 +33,6 @@ Requires:   %{name} = %{version}-%{release}
 %description sensor-hal
 Sensor HAL Plugins
 
-%package -n sensor-hal-devel
-Summary:    Sensor HAL Plugins library (devel)
-Group:      System/Development
-Requires:   %{name} = %{version}-%{release}
-
-%description -n sensor-hal-devel
-Sensor Plugin library (devel)
-
 %prep
 %setup -q
 cp %{SOURCE1} .
@@ -67,47 +59,3 @@ rm -rf %{buildroot}
 %manifest sensor-hal.manifest
 %attr(0644,root,root) /usr/etc/sensors.xml
 %{_libdir}/libsensor-hal.so
-%if %{accel_state} == "ON"
-%{_libdir}/sensor-hal/libaccel_sensor_hal.so
-%endif
-%if %{gyro_state} == "ON"
-%{_libdir}/sensor-hal/libgyro_sensor_hal.so
-%endif
-%if %{geo_state} == "ON"
-%{_libdir}/sensor-hal/libgeo_sensor_hal.so
-%endif
-%if %{proxi_state} == "ON"
-%{_libdir}/sensor-hal/libproxi_sensor_hal.so
-%endif
-%if %{light_state} == "ON"
-%{_libdir}/sensor-hal/liblight_sensor_hal.so
-%endif
-%if %{pressure_state} == "ON"
-%{_libdir}/sensor-hal/libpressure_sensor_hal.so
-%endif
-%if %{temperature_state} == "ON"
-%{_libdir}/sensor-hal/libtemperature_sensor_hal.so
-%endif
-%if %{ultraviolet_state} == "ON"
-%{_libdir}/sensor-hal/libultraviolet_sensor_hal.so
-%endif
-%if %{bio_led_red_state} == "ON"
-%{_libdir}/sensor-hal/libbio_led_red_sensor_hal.so
-%endif
-%if %{rv_state} == "ON"
-%{_libdir}/sensor-hal/librv_raw_sensor_hal.so
-%endif
-
-
-
-%files -n sensor-hal-devel
-%{_includedir}/sensor-hal/cconfig.h
-%{_includedir}/sensor-hal/csensor_config.h
-%{_includedir}/sensor-hal/sensor_hal_base.h
-%{_includedir}/sensor-hal/cbase_lock.h
-%{_includedir}/sensor-hal/cmutex.h
-%{_includedir}/sensor-hal/sensor_logs.h
-%{_includedir}/sensor-hal/sensor_common.h
-%{_libdir}/libsensor-hal.so
-%{_libdir}/pkgconfig/sensor-hal.pc
-
