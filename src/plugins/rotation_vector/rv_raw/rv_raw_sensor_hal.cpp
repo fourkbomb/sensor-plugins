@@ -266,21 +266,3 @@ bool rv_raw_sensor_hal::get_properties(sensor_properties_s &properties)
 	properties.max_batch_count = 0;
 	return true;
 }
-
-extern "C" sensor_module* create(void)
-{
-	rv_raw_sensor_hal *sensor;
-
-	try {
-		sensor = new(std::nothrow) rv_raw_sensor_hal;
-	} catch (int err) {
-		ERR("Failed to create module, err: %d, cause: %s", err, strerror(err));
-		return NULL;
-	}
-
-	sensor_module *module = new(std::nothrow) sensor_module;
-	retvm_if(!module || !sensor, NULL, "Failed to allocate memory");
-
-	module->sensors.push_back(sensor);
-	return module;
-}
