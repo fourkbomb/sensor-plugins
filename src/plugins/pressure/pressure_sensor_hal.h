@@ -44,6 +44,8 @@ private:
 	float m_pressure;
 	float m_sea_level_pressure;
 	float m_temperature;
+	float m_temperature_offset;
+	float m_temperature_resolution;
 
 	int m_resolution;
 
@@ -66,5 +68,7 @@ private:
 	cmutex m_value_mutex;
 
 	bool update_value(void);
+	float pressure_to_altitude(float pressure);
+	void raw_to_base(sensor_data_t &data);
 };
 #endif /*_PRESSURE_SENSOR_HAL_CLASS_H_*/

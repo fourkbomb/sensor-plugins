@@ -50,10 +50,10 @@ ENDIF()
 add_subdirectory(lib)
 add_subdirectory(interface)
 
-configure_file( sensor_module_create.cpp.in sensor_module_create.cpp @ONLY)
+configure_file( hal_module_create.cpp.in hal_module_create.cpp @ONLY)
 
 add_library(sensor-hal SHARED
-	sensor_module_create.cpp
+	hal_module_create.cpp
 	${SRCS}
 	)
 

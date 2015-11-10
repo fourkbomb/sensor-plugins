@@ -24,6 +24,7 @@
 #include <pressure_sensor_hal.h>
 #include <sys/ioctl.h>
 #include <fstream>
+#include <algorithm>
 
 using std::ifstream;
 using std::string;
@@ -40,6 +41,7 @@ using std::string;
 #define ATTR_VALUE				"value"
 
 #define SEA_LEVEL_PRESSURE 101325.0
+#define SEA_LEVEL_RESOLUTION 0.01
 
 pressure_sensor_hal::pressure_sensor_hal()
 : m_pressure(0)
@@ -126,6 +128,26 @@ pressure_sensor_hal::pressure_sensor_hal()
 
 	m_raw_data_unit = (float)(raw_data_unit);
 	INFO("m_raw_data_unit = %f\n", m_raw_data_unit);
+
+	double temperature_resolution;
+
+	if (!config.get(SENSOR_TYPE_PRESSURE, m_model_id, ELEMENT_TEMPERATURE_RESOLUTION, temperature_resolution)) {
+		ERR("[TEMPERATURE_RESOLUTION] is empty\n");
+		throw ENXIO;
+	}
+
+	m_temperature_resolution = (float)temperature_resolution;
+	INFO("m_temperature_resolution = %f\n", m_temperature_resolution);
+
+	double temperature_offset;
+
+	if (!config.get(SENSOR_TYPE_PRESSURE, m_model_id, ELEMENT_TEMPERATURE_OFFSET, temperature_offset)) {
+		ERR("[TEMPERATURE_OFFSET] is empty\n");
+		throw ENXIO;
+	}
+
+	m_temperature_offset = (float)temperature_offset;
+	INFO("m_temperature_offset = %f\n", m_temperature_offset);
 
 	if ((m_node_handle = open(m_data_node.c_str(),O_RDWR)) < 0) {
 		ERR("Failed to open handle(%d)", m_node_handle);
@@ -275,6 +297,21 @@ bool pressure_sensor_hal::is_data_ready(void)
 	return ret;
 }
 
+
+float pressure_sensor_hal::pressure_to_altitude(float pressure)
+{
+	return 44330.0f * (1.0f - pow(pressure/m_sea_level_pressure, 1.0f/5.255f));
+}
+
+void pressure_sensor_hal::raw_to_base(sensor_data_t &data)
+{
+	data.values[0] = data.values[0] * m_resolution;
+	m_sea_level_pressure = data.values[1] * SEA_LEVEL_RESOLUTION;
+	data.values[1] = pressure_to_altitude(data.values[0]);
+	data.values[2] = data.values[2] * m_temperature_resolution + m_temperature_offset;
+	data.value_count = 3;
+}
+
 int pressure_sensor_hal::get_sensor_data(sensor_data_t &data)
 {
 	AUTOLOCK(m_value_mutex);
@@ -284,6 +321,8 @@ int pressure_sensor_hal::get_sensor_data(sensor_data_t &data)
 	data.values[0] = m_pressure;
 	data.values[1] = m_sea_level_pressure;
 	data.values[2] = m_temperature;
+
+	raw_to_base(data);
 
 	return 0;
 }
