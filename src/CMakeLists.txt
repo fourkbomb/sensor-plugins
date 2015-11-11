@@ -1,10 +1,22 @@
 cmake_minimum_required(VERSION 2.6)
-project(sensor_hal_src CXX)
+project(sensor-hal CXX)
+
+INCLUDE(FindPkgConfig)
+PKG_CHECK_MODULES(plugin_pkgs REQUIRED dlog libxml-2.0)
+
+FOREACH(flag ${plugin_pkgs_LDFLAGS})
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}")
+ENDFOREACH(flag)
+
+FOREACH(flag ${plugin_pkgs_CFLAGS})
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}")
+ENDFOREACH(flag)
+
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
 include_directories(${CMAKE_SOURCE_DIR}/src/lib)
 include_directories(${CMAKE_SOURCE_DIR}/src/interface)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-
 
 IF("${ACCEL}" STREQUAL "ON")
 include_directories(${CMAKE_SOURCE_DIR}/src/plugins/accel)
@@ -47,20 +59,18 @@ include_directories(${CMAKE_SOURCE_DIR}/src/plugins/rotation_vector/rv_raw)
 list (APPEND SRCS "plugins/rotation_vector/rv_raw/rv_raw_sensor_hal.cpp")
 ENDIF()
 
-add_subdirectory(lib)
-add_subdirectory(interface)
-
-configure_file( hal_module_create.cpp.in hal_module_create.cpp @ONLY)
-
-add_library(sensor-hal SHARED
+add_library(${PROJECT_NAME} SHARED
 	hal_module_create.cpp
 	${SRCS}
-	)
-
-SET_TARGET_PROPERTIES(
-	sensor-hal
-	PROPERTIES
-	LINKER_LANGUAGE CXX
+	lib/cbase_lock.cpp
+	lib/cconfig.cpp
+	lib/cmutex.cpp
+	lib/csensor_config.cpp
+	lib/sensor_logs.cpp
+	interface/sensor_hal_base.cpp
+	interface/sensor_hal.h
 )
 
-install(TARGETS sensor-hal DESTINATION ${CMAKE_INSTALL_LIBDIR})
+target_link_libraries(${PROJECT_NAME} ${plugin_pkgs_LDFLAGS} "-lrt -ldl -pthread")
+
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR})

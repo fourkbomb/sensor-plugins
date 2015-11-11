@@ -27,7 +27,7 @@ Sensor HAL Plugins
 
 %package sensor-hal
 Summary:    Sensor HAL Plugins
-Group:      System/Sensor HAL Plugins
+Group:      System/Sensor Framework
 Requires:   %{name} = %{version}-%{release}
 
 %description sensor-hal
@@ -57,5 +57,5 @@ rm -rf %{buildroot}
 
 %files -n sensor-hal
 %manifest sensor-hal.manifest
-%attr(0644,root,root) /usr/etc/sensors.xml
+%attr(0644,root,root)/usr/etc/sensors.xml
 %{_libdir}/libsensor-hal.so

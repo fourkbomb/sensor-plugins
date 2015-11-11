@@ -50,8 +50,8 @@ typedef enum {
 class sensor_hal
 {
 public:
-	sensor_hal();
-	virtual ~sensor_hal();
+	sensor_hal(){};
+	virtual ~sensor_hal(){};
 
 	virtual std::string get_model_id(void) = 0;
 	virtual sensor_hal_type_t get_type(void) = 0;
