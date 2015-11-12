@@ -356,7 +356,7 @@ typedef struct sensorhub_event_t {
 	sensorhub_data_t data;
 } sensorhub_event_t;
 
-typedef struct sensor_module{
+typedef struct {
 	std::vector<void*> sensors;
 } sensor_module;
 

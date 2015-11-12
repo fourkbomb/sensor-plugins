@@ -1,42 +1,31 @@
-#define ACCEL strcmp("@ACCEL@", "ON")
-#define BIO_LED_RED strcmp("@BIO_LED_RED@", "ON")
-#define GEO strcmp("@GEO@", "ON")
-#define GYRO strcmp("@GYRO@", "ON")
-#define LIGHT strcmp("@LIGHT@", "ON")
-#define PRESSURE strcmp("@PRESSURE@", "ON")
-#define PROXI strcmp("@PROXI@", "ON")
-#define RV_RAW strcmp("@RV_RAW@", "ON")
-#define TEMPERATURE strcmp("@TEMPERATURE@", "ON")
-#define ULTRAVIOLET strcmp("@ULTRAVIOLET@", "ON")
-
-#if $ACCEL == 1
+#ifdef ENABLE_ACCEL
 #include <accel_sensor_hal.h>
 #endif
-#if $BIO_LED_RED == 1
+#ifdef ENABLE_BIO_LED_RED
 #include <bio_led_red_sensor_hal.h>
 #endif
-#if $GEO == 1
+#ifdef ENABLE_GEO
 #include <geo_sensor_hal.h>
 #endif
-#if $GYRO == 1
+#ifdef ENABLE_GYRO
 #include <gyro_sensor_hal.h>
 #endif
-#if $LIGHT == 1
+#ifdef ENABLE_LIGHT
 #include <light_sensor_hal.h>
 #endif
-#if $PRESSURE == 1
+#ifdef ENABLE_PRESSURE
 #include <pressure_sensor_hal.h>
 #endif
-#if $PROXI == 1
+#ifdef ENABLE_PROXI
 #include <proxi_sensor_hal.h>
 #endif
-#if $RV_RAW == 1
+#ifdef ENABLE_RV_RAW
 #include <rv_raw_sensor_hal.h>
 #endif
-#if $TEMPERATURE == 1
+#ifdef ENABLE_TEMPERATURE
 #include <temperature_sensor_hal.h>
 #endif
-#if $ULTRAVIOLET == 1
+#ifdef ENABLE_ULTRAVIOLET
 #include <ultraviolet_sensor_hal.h>
 #endif
 
@@ -47,117 +36,117 @@ extern "C" sensor_module* create(void)
 	sensor_module *module = new(std::nothrow) sensor_module;
 	retvm_if(!module, NULL, "Failed to allocate memory");
 
-#if $ACCEL == 1
+#ifdef ENABLE_ACCEL
 	accel_sensor_hal *accel_sensor = NULL;
 	try {
 		accel_sensor = new(std::nothrow) accel_sensor_hal;
 	} catch (int err) {
 		ERR("Failed to create accel_sensor_hal module, err: %d, cause: %s", err, strerror(err));
 	}
-	if (!accel_sensor)
+
+	if (accel_sensor != NULL) {
 		module->sensors.push_back(accel_sensor);
+	}
 #endif
 
-#if $BIO_LED_RED == 1
+#ifdef ENABLE_BIO_LED_RED
 	bio_led_red_sensor_hal *bio_led_red_sensor = NULL;
 	try {
 		bio_led_red_sensor = new(std::nothrow) bio_led_red_sensor_hal;
 	} catch (int err) {
 		ERR("Failed to create bio_led_red_sensor_hal module, err: %d, cause: %s", err, strerror(err));
 	}
-	if (!bio_led_red_sensor)
+	if (bio_led_red_sensor != NULL)
 		module->sensors.push_back(bio_led_red_sensor);
-
 #endif
-#if $GEO == 1
+
+#ifdef ENABLE_GEO
 	geo_sensor_hal *geo_sensor = NULL;
 	try {
 		geo_sensor = new(std::nothrow) geo_sensor_hal;
 	} catch (int err) {
 		ERR("Failed to create geo_sensor_hal module, err: %d, cause: %s", err, strerror(err));
 	}
-	if (!geo_sensor)
+	if (geo_sensor != NULL)
 		module->sensors.push_back(geo_sensor);
-
 #endif
-#if $GYRO == 1
+
+#ifdef ENABLE_GYRO
 	gyro_sensor_hal *gyro_sensor = NULL;
 	try {
 		gyro_sensor = new(std::nothrow) gyro_sensor_hal;
 	} catch (int err) {
 		ERR("Failed to create gyro_sensor_hal module, err: %d, cause: %s", err, strerror(err));
 	}
-	if (!gyro_sensor)
+	if (gyro_sensor != NULL)
 		module->sensors.push_back(gyro_sensor);
-
 #endif
-#if $LIGHT == 1
+
+#ifdef ENABLE_LIGHT
 	light_sensor_hal *light_sensor = NULL;
 	try {
 		light_sensor = new(std::nothrow) light_sensor_hal;
 	} catch (int err) {
 		ERR("Failed to create light_sensor_hal module, err: %d, cause: %s", err, strerror(err));
 	}
-	if (!light_sensor)
+	if (light_sensor != NULL)
 		module->sensors.push_back(light_sensor);
+#endif
 
-	#endif
-#if $PRESSURE == 1
+#ifdef ENABLE_PRESSURE
 	pressure_sensor_hal *pressure_sensor = NULL;
 	try {
 		pressure_sensor = new(std::nothrow) pressure_sensor_hal;
 	} catch (int err) {
 		ERR("Failed to create pressure_sensor_hal module, err: %d, cause: %s", err, strerror(err));
 	}
-	if (!pressure_sensor)
+	if (pressure_sensor != NULL)
 		module->sensors.push_back(pressure_sensor);
-
 #endif
-#if $PROXI == 1
+
+#ifdef ENABLE_PROXI
 	proxi_sensor_hal *proxi_sensor = NULL;
 	try {
 		proxi_sensor = new(std::nothrow) proxi_sensor_hal;
 	} catch (int err) {
 		ERR("Failed to create proxi_sensor_hal module, err: %d, cause: %s", err, strerror(err));
 	}
-	if (!proxi_sensor)
+	if (proxi_sensor != NULL)
 		module->sensors.push_back(proxi_sensor);
-
 #endif
-#if $RV_RAW == 1
+
+#ifdef ENABLE_RV_RAW
 	rv_raw_sensor_hal *rv_raw_sensor = NULL;
 	try {
 		rv_raw_sensor = new(std::nothrow) rv_raw_sensor_hal;
 	} catch (int err) {
 		ERR("Failed to create rv_raw_sensor_hal module, err: %d, cause: %s", err, strerror(err));
 	}
-	if (!rv_raw_sensor)
+	if (rv_raw_sensor != NULL)
 		module->sensors.push_back(rv_raw_sensor);
-
 #endif
-#if $TEMPERATURE == 1
 
+#ifdef ENABLE_TEMPERATURE
 	temperature_sensor_hal *temperature_sensor = NULL;
 	try {
 		temperature_sensor = new(std::nothrow) temperature_sensor_hal;
 	} catch (int err) {
 		ERR("Failed to create temperature_sensor_hal module, err: %d, cause: %s", err, strerror(err));
 	}
-	if (!temperature_sensor)
+	if (temperature_sensor != NULL)
 		module->sensors.push_back(temperature_sensor);
-
 #endif
-#if $ULTRAVIOLET == 1
+
+#ifdef ENABLE_ULTRAVIOLET
 	ultraviolet_sensor_hal *ultraviolet_sensor = NULL;
 	try {
 		ultraviolet_sensor = new(std::nothrow) ultraviolet_sensor_hal;
 	} catch (int err) {
 		ERR("Failed to create ultraviolet_sensor_hal module, err: %d, cause: %s", err, strerror(err));
 	}
-	if (!ultraviolet_sensor)
+	if (ultraviolet_sensor != NULL)
 		module->sensors.push_back(ultraviolet_sensor);
 #endif
-
 
 	return module;
 }

@@ -12,15 +12,15 @@ BuildRequires:  pkgconfig(dlog)
 BuildRequires:  pkgconfig(libxml-2.0)
 
 %define accel_state ON
-%define gyro_state ON
-%define proxi_state ON
-%define light_state ON
-%define geo_state ON
-%define pressure_state ON
-%define temperature_state ON
-%define ultraviolet_state ON
-%define rv_state ON
-%define bio_led_red_state ON
+%define gyro_state OFF
+%define proxi_state OFF
+%define light_state OFF
+%define geo_state OFF
+%define pressure_state OFF
+%define temperature_state OFF
+%define ultraviolet_state OFF
+%define rv_state OFF
+%define bio_led_red_state OFF
 
 %description
 Sensor HAL Plugins
