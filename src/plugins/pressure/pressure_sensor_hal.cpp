@@ -129,6 +129,16 @@ pressure_sensor_hal::pressure_sensor_hal()
 	m_raw_data_unit = (float)(raw_data_unit);
 	INFO("m_raw_data_unit = %f\n", m_raw_data_unit);
 
+	double resolution;
+
+	if (!config.get(SENSOR_TYPE_PRESSURE, m_model_id, ELEMENT_RESOLUTION, resolution)) {
+		ERR("[RESOLUTION] is empty\n");
+		throw ENXIO;
+	}
+
+	m_resolution = (float)resolution;
+	INFO("m_resolution = %f\n", m_resolution);
+
 	double temperature_resolution;
 
 	if (!config.get(SENSOR_TYPE_PRESSURE, m_model_id, ELEMENT_TEMPERATURE_RESOLUTION, temperature_resolution)) {
