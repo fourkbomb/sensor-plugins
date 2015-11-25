@@ -58,4 +58,4 @@ rm -rf %{buildroot}
 %files -n sensor-hal
 %manifest sensor-hal.manifest
 %attr(0644,root,root)/usr/etc/sensors.xml
-%{_libdir}/libsensor-hal.so
+%{_libdir}/sensor-hal/libsensor-hal.so
