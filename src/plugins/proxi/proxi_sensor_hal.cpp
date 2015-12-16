@@ -33,8 +33,6 @@ using std::ifstream;
 #define ELEMENT_VENDOR			"VENDOR"
 #define ATTR_VALUE 				"value"
 
-#define PROXI_CODE	0x0019
-
 proxi_sensor_hal::proxi_sensor_hal()
 : m_state(-1)
 , m_fired_time(0)
@@ -150,7 +148,7 @@ bool proxi_sensor_hal::update_value(void)
 	}
 
 	DBG("read event,  len : %d , type : %x , code : %x , value : %x", len, proxi_event.type, proxi_event.code, proxi_event.value);
-	if ((proxi_event.type == EV_ABS) && (proxi_event.code == PROXI_CODE)) {
+	if ((proxi_event.type == EV_ABS) && (proxi_event.code == ABS_DISTANCE)) {
 		AUTOLOCK(m_value_mutex);
 		m_state = proxi_event.value;
 		m_fired_time = sensor_hal_base::get_timestamp(&proxi_event.time);
